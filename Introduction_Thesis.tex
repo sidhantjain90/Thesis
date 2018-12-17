@@ -2,7 +2,7 @@
 \section{General Introduction}
 Plasmas exist in several forms in the Universe such as surface of the sun, interstellar gaseous clouds. They can also be observed near Earth's surface in the form of Lightning strikes, sprites and auroras. However, they do not exist naturally on Earth and hence created artificially by humans for various scientific and commercial purposes. A Plasma is formed when a medium (gas) is provided with sufficient energy (here electric field) to remove electrons from atoms of the medium. This energy may be provided by application of an electric field, joule heating or other sources such as cosmic rays. So, Plasmas primarily consists of electrons, positively charged ions and neutrals.
 
-Plasmas can be classified into two types based on relative temperatures of electrons, ions and neutrals, namely, thermal and non-thermal plasmas. In thermal plasmas, the electrons are in thermal equilibrium with the positive ions. In non-thermal plasma, the temperature of the electron is much higher than than those of the ions and neutrals. This is because the energy transfer from applied electric field to electrons is much faster than the energy loss due to collisional energy transfer between electrons and ions or heavy species. This is due to the relatively smaller mass of the electrons. Non-Equilibrium Plasmas also referred as Cold Plasmas have several applications such as plasma-assisted combustion, air purification, ozone production, etc.
+Plasmas can be classified into two types based on relative temperatures of electrons, ions and neutrals, namely, thermal and non-thermal plasmas. In thermal plasmas, the electrons are in thermal equilibrium with the positive ions. In non-thermal plasma, the temperature of the electron is much higher than than those of the ions and neutrals. This is because the energy transfer from applied electric field to electrons is much faster than the energy loss due to collisional energy transfer between electrons and ions or heavy species. This is due to the relatively smaller mass of the electrons. Non-Equilibrium Plasmas also referred as Cold Plasmas have several environmental applications such as plasma-assisted combustion, air purification and ozone production. Since they exist substantially at room temperature, cold plasma can be used to modify the surface properties of material \cite{Bonizzoni et Vassallo, 2002}.
 
 The phenomenon of Non-Equilibrium cold plasmas was studied with the help of a theory developed by Loeb and Meek \cite{Loeb and Meek , 1940a and 1940b} who described the formation of a highly non-linear space charge waves before the occurence of electrical breakdown, which creates an internal electric field of its own, comparable to the applied (external) field. These space charge waves are commonly known as streamers. Streamers are considered as the precursors to spark discharges, lightening\cite{Bazelyan et Raizer 2000} and sprites \cite{Franz et al 1990; Bourdon et al 2007}. They are able to initiate spark discharges in relatively shorter gaps i.e several centimetres, at near ground pressures in air.  
 
@@ -27,11 +27,14 @@ A gaseous medium such as air always contain some ions and electrons. This is due
 1. Impact Ionization:
 
 2. Recombination:
+           It occurs when electron loses its energy and recombines with an ion.
 
 3. Excitation:
+           In this process, an electron collides with a neutral atom and some of electron's kinetic energy is transfered to the internal energy of the atom. This results in the excitation of the atom.
+
 
 4. Attachment:
-
+            In this process, the electron sticks with a neutral atom to make a negative ion.
 
 
 \section{Electron Avalanche}
@@ -39,39 +42,41 @@ A gaseous medium such as air always contain some ions and electrons. This is due
 If the energy acquired by a single electron is more than the ionization potential , it knocks off another electron from a neutral molecule. As a consequence, two slow electrons are accelerated further by the reigning electric field. Until the breakdown value of electric field has been achieved, there is a balance between the production of electrons (due to impact ionization) and loss of electrons (due to attachment). Above the breakdown field, the number of electrons start to increase exponentially giving rise to a phenomenon known as avalanche.
 
 \section{Avalanche to Streamer Transition}
-
+External electric field acts as controller of an electron avalanche. The number of electrons is not sufficient enough to have a space charge field of its own. However, as the number of electrons is increased to a sufficient number density (Meek's Criterion), they start to develop their own field which dsitorts the external electric field. When the newly formed space charge field becomes comparable to the external field, the electron avalanche transforms into a streamer whose propagation is controlled by the space charge field. 
 
 \section{Streamer Discharge Mechanism}
 
-Streamers are thin ionized plasma channels formed between two oppositely charged electrodes when space charge field become comparable to the external electric field (Meek's criterion). They can propagate to either direction i.e towards anode or cathode as a result of distortion of the external electric field. They occur before the complete breakdown of a gas or dieclectric medium. Hence, they are also referred as precursors of electrical breakdown.  
+Streamers are thin ionized plasma channels formed between two oppositely charged electrodes when space charge field become comparable to the external electric field (Meek's criterion). They can propagate to either direction i.e towards anode or cathode as a result of distortion of the external electric field. They occur before the complete breakdown of a gas or dieclectric medium. Hence, they are also referred as precursors of electrical breakdown.  The curved space charge layers tend to screen the external field in the discharge region and as a result they develop an enhanced electric field at the tip, which permits streamers to propagate in the region of field lower than that at breakdown. 
+There are two types of streamers: Positive and Negative. Positive streamers are formed when the avalanche exhausts its reserve of electrons i.e when it reaches anode. They get initiated at the anode and appear to move towards cathode. The photons generated from the primary avalanche generates the free electrons ahead of the streamer head which are then absorbed by the incoming streamer and form a quasi-neutral plasma with the ions in the mix. Before being absorbed these secondary electrons also excite some neutral atoms on their way. These atoms then emit more photons, hence repeating the cycle. This is how positive streamers propagate. Negative streamers are formed when the gap is large enough so that the avalanche transforms into a streamer even before reaching the anode. Hence, negative streamers propagate towards the anode. They are more diffusive since the electrons move outwards in contrast to positive streamers where electrons get absorbed by the streamer.    
 
 \subsection{Challenges in Modeling Streamers}
 
-
+   There are several challenges that occur in numerically modeling streamers. 
+   
+   1. Intial attempts on modeling of streamers propagation revealed that the characterstics of streamer can be truly described in 2-D. 
+   2. Streamer involves steep density gradients which require extremely fine grid especially in the discharge region.
+   3. Streamer involves very short time scales of propagation. Numerically modeling these time scales demands very high computational costs and high resources. 
+   4. The non-linear behaviour of space charge with the electric field makes the coupling between tranport equations and poisson's equation very complicated.
 
 
 \chapter{Numerical Models}
+      Numerical models are used to solve discretized partial differential equations on a computational domain. This is done through various numerical models. As discussed above, in literature, initially finite difference methods were used to model the streamers in one dimension. However, the accuracy of finite difference methods could not provide best results and hence new methods had to be adopted. Finite Volume methods have been readily accepted since they are flexible in use and does not demand complex code implementation.
 
-\section{Kinetic Models}
+\section{Poisson's Equation}
 
-\section{Fluid Models}
+   For numerical modeling of streamers, the calculation of electric field is crucial. This is because the transport parameters and source terms are non-linearly dependent on the electric field. Also, the charge densities are directly related to the electric field. The electic field is calculated from the Poisson's equation. In case of streamer simulations, the elliptic Poisson's equation is dicretized using the numerical methods and electic potential is approximated. Therefore, solution of Poisson's equation required three main points:
+   1. Discretization scheme: This is required to divide the domain into numerous grids with varying grid size. It controls the accuracy and the stability of the solution.
+   2. Boundary Conditions: Since Poisson's equation is a partial differential equation, it requires special conditions at the domain boundaries to describe the computational domain.
+   3. Numerical Methods: This is required to solve the discretized equations of Poisson's equation. There are two types of solvers: Direct(FACR,MUMPS) and iterative(Multigrid). 
 
-\section{Hybrid Models}
-
-\section{Solving Poisson's Equation}
 
 \subsection{Local Field Approximation}
 
-Kundhardt and team developed the local field approximation. \cite{Kunhardt et al 1988}.
-
-
-
+According to Local Field Approximation, The local equilibrium of electrons is instantaneously achieved in time in response to Electric Field. Hence, the transport coefficients and reaction coefficients are functions of local parameters only, thus imposing a local equilibrium. This approximation is valid only as long as the time scales are much smaller than the spatial or temporal gradients in the electric field. This thoery was developed by Kundhardt and team \cite{Kunhardt et al 1988}. It is used in numerical modeling of streamers since then.
 
 
 \chapter{Photoionization Model}
 
 
+\bibliography{Introduction_Thesis}
 
-\chapter{Grid Generation Methods}
-
-\chapter{Parallelization Methods}
