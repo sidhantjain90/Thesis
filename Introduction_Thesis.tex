@@ -14,7 +14,7 @@
 
 \section{Introduction}
 
-Plasma exist in several forms in the Universe such as surface of the sun, interstellar gaseous clouds. They can also be observed near Earth's surface in the form of Lightning strikes \cite{Bazelyan2000TheLasers} \cite{Raizer1991GasRazryada}, sprites \cite{Bourdon2007EfficientEquations} \cite{Franz1990TelevisionSystem} and auroras. However, they do not exist naturally on Earth and hence created artificially by humans for various scientific and commercial purposes. A Plasma is formed when a medium (gas) is provided with sufficient energy to remove electrons from atoms of the medium. This energy may be provided by application of an electric field, heating or other sources such as cosmic rays. Hence a plasma primarily consists of electrons, positively charged ions and neutrals.
+Plasma exist in several forms in the Universe such as surface of the sun, interstellar gaseous clouds. They can also be observed near Earth's surface in the form of Lightning strikes \cite{Bazelyan2000TheLasers} \cite{Raizer1991GasRazryada}, sprites \cite{Bourdon2007EfficientEquations} \cite{Franz1990TelevisionSystem} and auroras. However, they do not exist naturally on Earth and hence are created artificially by humans for various scientific and commercial purposes. A Plasma is formed when a medium (gas) is provided with sufficient energy to remove electrons from atoms of the medium. This energy may be provided by application of an electric field, heating or other sources such as cosmic rays. Hence a plasma primarily consists of electrons, positively charged ions and neutrals.
 
 Based on relative temperatures of electrons, ions and neutrals, Plasma can be classified into two types, namely, thermal and non-thermal plasma. In thermal plasma, the electrons are in thermal equilibrium with the positive ions. In non-thermal plasma, the temperature of the electron is much higher than those of the ions and neutrals. This is because the energy transfer from applied electric field to electrons is much higher than the energy loss due to collisional energy transfer between electrons and ions or heavy species. This is due to the relatively smaller mass of the electrons. Non-Equilibrium Plasma also referred as Cold Plasma have several environmental applications such as plasma-assisted combustion \cite{Starikovskaia2006PlasmaCombustion} \cite{Popov2016KineticsMixtures},pollution control, surface treatment \cite{Kogelschatz2002FilamentaryDischarges}  and ozone production \cite{Eliasson1991ModelingPlasmas}. Since they exist substantially at room temperature, cold plasma can be used to modify the surface properties of material \cite{Bonizzoni2002PlasmaApplications}.
 
@@ -140,7 +140,7 @@ Another equation is required to take into account the production and loss of cha
 \frac{\partial n_u}{\partial t} - D_u \vec{\nabla^2} n_u = \nu_u n_e -\sum_{d < u}\frac{n_u}{\tau_{ud}} + \sum_{d > u}\frac{n_d}{\tau_{du}} - S_u^- + S_u^+ 
 \end{equation}
 
-where $D_u$ is the diffusion coefficient of species u in gas and $\nu_u$ is the electron impact ionization frequency for level u. On Right Hand Side, second term corresponds to the radiative deexcitation level of u to lower levels d $<$$ u . Third term represents the radiative excitation level from d to u $>$ d. $\frac{1}{\tau}$ is the Einstein Coefficient for spontaneous transition. $S^-$ and $S^+$ are loss and source terms due to quenching between transition levels.     
+where $D_u$ is the diffusion coefficient of species u in gas and $\nu_u$ is the electron impact ionization frequency for level u. On Right Hand Side, second term corresponds to the radiative de-excitation level of u to lower levels d $<$$ u . Third term represents the radiative excitation level from d to u $>$ d. $\frac{1}{\tau}$ is the Einstein Coefficient for spontaneous transition. $S^-$ and $S^+$ are loss and source terms due to quenching between transition levels.     
 
 \subsection{Photoionization Model}
 Photoionization source term is calculated based on the direct numerical solution of Eddington approximation(first and third-order) of the Radiative transfer equation as provided by \cite{Segur2006}. It is directly related to the photon distribution function $\Psi_\nu(\vec{r},\vec{\Omega},t)$ of frequency $\nu$ at position $\vec{r}$ in direction $\vec{\omega}$ and at time t.
@@ -171,7 +171,7 @@ Within the timescale of streamer propagation, photon propagation is negligible a
 
 \subsubsection{Classical Integral Model for Photoionization}
 
-As mentioned in \cite{Bourdon2007EfficientEquations}, \cite{ZhelezniakM.B.andMnatsakanianA.K.andSizykh1982PhotoionizationDischarge}, direct integration of above radiative transfer equation over the whole space and over solid angle $d\Omega$ gives integral expression for isotropic part of distribution function $\Psi_{0,\nu}(\vec{r},t)$. Also the photoionization coefficient is usually considered to be proportional to total absorption coefficient $\mu{_\nu}^{ph}= \xi \mu_\nu$. Substituting the isotropic function in the equation \ref{eq:6} the photoionization rate at point of observation $\vec{r}$ due to arbitrary point $\vec{r}^'$ on the source ring emitting photons is given by:
+As mentioned in \cite{Bourdon2007EfficientEquations}, \cite{ZhelezniakM.B.andMnatsakanianA.K.andSizykh1982PhotoionizationDischarge}, direct integration of above radiative transfer equation over the whole space and over solid angle $d\Omega$ gives integral expression for isotropic part of distribution function $\Psi_{0,\nu}(\vec{r},t)$. Also the photoionization coefficient is usually considered to be proportional to total absorption coefficient $\mu{_\nu}^{ph}= \xi_\nu \mu_\nu$ ($\xi_\nu$ is the photoionization efficiency viz. ratio of photoelectrons appearing to total number of absorbed photons of frequency $\nu$). Substituting the isotropic function in the equation \ref{eq:6} the photoionization rate at point of observation $\vec{r}$ due to arbitrary point $\vec{r}^'$ on the source ring emitting photons is given by:
 
 \begin{equation} \label{eq:14}
 S_{ph}(\vec{r}) = {\int\int\int_{V^'}} \frac{I(\vec{r'}) g(R)}{4 \pi {R^2}} d{V^'}
@@ -183,13 +183,28 @@ where R is the position vector $R= \vec{r}-\vec{r'}$. The production of photons 
 I(\vec{r}) = \xi \frac{n_u(\vec{r})}{\tau_u}= \frac{p_q}{p+p_q} \xi \frac{\nu_u}{\nu_{ion}} S_i(\vec{r})
 \end{equation} 
 
-Where $\xi$ is the mean value of $\xi_\nu$ , $n_u(\vec{r}$ is the density of radiative excited species u, ratio $\frac{p_q}{p+p_q}$ is the quenching factor, $\tau_u$ is the radiative relaxation time accounting for effects of spontaneous emission (i.e $\tau_u = \frac{1}{A_u}$ where $A_u$ is the Einstein coefficient., $\nu_u$ is the electron impact excitation frequency for level u and $S_i=\nu_ion n_e$ where $n_e$ is the electron number density and $\nu_ion$ is the ionization frequency. 
+Where $\xi$ is the mean value of $\xi_\nu$ , $n_u(\vec{r}$ is the density of radiative excited species u, ratio $\frac{p_q}{p+p_q}$ is the quenching factor, $\tau_u$ is the radiative relaxation time accounting for effects of spontaneous emission (i.e $\tau_u = \frac{1}{A_u}$ where $A_u$ is the Einstein coefficient., $\nu_u$ is the electron impact excitation frequency for level u and $S_i=\nu_{ion} n_e$ where $n_e$ is the electron number density and $\nu_ion$ is the ionization frequency. 
 
-According to the model derived by Zhelezniak et al \cite{ZhelezniakM.B.andMnatsakanianA.K.andSizykh1982PhotoionizationDischarge}, it is generally assumed that ionization in $N_2-O_2$ mixtures (air) can only be produced by photons emitted by Nitrogen in the wavelength range $\Delta \lambda = 98-102.5$mm. The photon energy is not sufficient to ionize the nitrogen molecules and only oxygen molecules are ionized. Hence, the term g(R) in the equation \ref{eq:9} is given by:
+The term g(R) in equation \ref{eq:9} is given by the following relation:
+
+\begin{equation} \label{eq:16}
+g(R) = \int_{\Delta \nu} d\nu \mu_\nu exp(-\mu_\nu R)
+\end{equation} 
+
+
+According to the model derived by Zhelezniak et al \cite{ZhelezniakM.B.andMnatsakanianA.K.andSizykh1982PhotoionizationDischarge}, it is generally assumed that ionization in $N_2-O_2$ mixtures (air) can only be produced by photons emitted by Nitrogen in the wavelength range $\Delta \lambda = 98-102.5$mm. The photon energy is not sufficient to ionize the nitrogen molecules and only oxygen molecules are ionized. The absorption coefficient of $O_2$ is sharp function of frequency as given by relation:
+
+\begin{equation}
+\mu_\nu = \mu_{min} ( \frac{\mu_{max}}{\mu_{min}} ) ^ {\frac{\nu-\nu_{min}}{\nu_{max}-\nu_{min}}}
+\end{equation} 
+
+Inserting above equation in equation \ref{eq:16}, and substituting $\mu_{min}=\chi_{min} P_O_2$ and $\mu_{max}=\chi_{max} P_O_2$ , the term g(R) becomes:
 
 \begin{equation}
 \frac{g(R)}{p_{O_2}} = \frac{exp(-\chi_{min} p_{O_2} R)- exp(-\chi_{max} p_{O_2} R)}{p_{O_2} R ln(\chi_{max} / \chi_{min})}
 \end{equation} 
+
+Where $\chi_{min}= 0.035$ $Torr^{-1} cm^_1$, $\chi_{max}= 2$ $Torr^{-1} cm^_1$ and $P_O_2$(=150 Torr) is the partial pressure of oxygen.
 
 The above model has been implemented using cylindrical coordinates system to take into account the dynamics of two-dimensional azimuthally symmetric streamers.
 
@@ -198,6 +213,12 @@ In the model by \cite{ZhelezniakM.B.andMnatsakanianA.K.andSizykh1982Photoionizat
 \begin{equation}
 \frac{n_u(\vec{r'},t)}{\tau_u} = \frac{p_q}{p+p_q} \frac{\nu_u}{\nu_{ion}} \nu_{ion} n_e
 \end{equation} 
+
+Where $\nu_{ion} n_e$ is the reaction rate $S_i(\vec{r})$.
+
+
+
+
 
 
 \subsubsection{Eddington Approximation Model}
@@ -210,7 +231,7 @@ The Radiative transfer equation depends on frequency $\nu$ as can be observed fr
 where $\delta(\nu)$ is a Dirac function. Hence, the Radiative transfer equation becomes:
 
 \begin{equation} \label{eq:10}
-\vec{\Omega} \cdot \vec{\nabla} \Psi_\nu(\vec{r},\vec{\Omega},t) + \mu\Psi_\nu(\vec{r},\vec{\Omega},t) = \frac{n_u (\vec{r},t)}{4 \pi c \tau_{u}}
+\vec{\Omega} \cdot \vec{\nabla} \Psi(\vec{r},\vec{\Omega},t) + \mu\Psi(\vec{r},\vec{\Omega},t) = \frac{n_u (\vec{r},t)}{4 \pi c \tau_{u}}
 \end{equation}
 
 In Eddington Approximation it is assumed that the distribution of photons can be represented by the first two terms in the spherical harmonic expansion:
@@ -245,11 +266,11 @@ After multiplication by $\vec{\Omega}$ , equation \ref{eq:10} becomes:
 
 Combining equations \ref{eq:14} and \ref{eq:15} and eliminating $\Psi_1$, we obtain the following equation:
 
-\begin{equation} \label{eq:16}
+\begin{equation} 
 -\vec{\nabla}(\frac{1}{3\mu} \vec{\nabla}\Psi_0(\vec{r},t) + \mu \Psi_0(\vec{r},t) = \frac{n_u (\vec{r},t)}{c \tau_{u}}
 \end{equation} 
 
-The above equation is called Eddington approximation of the previously derived monochromatic expression of radiative transfer equation. The advantage of this equation lies the simplicity in solving it. It is an elliptic equation which has a similar structure to Poisson's Equation and hence can be solved with same numerical routine. 
+The above equation is called Eddington approximation of the previously derived monochromatic expression of radiative transfer equation. The advantage of this equation lies in the simplicity in solving it. It is an elliptic equation which has a similar structure to Poisson's Equation and hence can be solved with same numerical routine. 
 
 
 
