@@ -1,82 +1,262 @@
-\chapter{Introduction}
-\section{General Introduction}
-Plasmas exist in several forms in the Universe such as surface of the sun, interstellar gaseous clouds. They can also be observed near Earth's surface in the form of Lightning strikes, sprites and auroras. However, they do not exist naturally on Earth and hence created artificially by humans for various scientific and commercial purposes. A Plasma is formed when a medium (gas) is provided with sufficient energy (here electric field) to remove electrons from atoms of the medium. This energy may be provided by application of an electric field, joule heating or other sources such as cosmic rays. So, Plasmas primarily consists of electrons, positively charged ions and neutrals.
+\documentclass{article}
+%\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
 
-Plasmas can be classified into two types based on relative temperatures of electrons, ions and neutrals, namely, thermal and non-thermal plasmas. In thermal plasmas, the electrons are in thermal equilibrium with the positive ions. In non-thermal plasma, the temperature of the electron is much higher than than those of the ions and neutrals. This is because the energy transfer from applied electric field to electrons is much faster than the energy loss due to collisional energy transfer between electrons and ions or heavy species. This is due to the relatively smaller mass of the electrons. Non-Equilibrium Plasmas also referred as Cold Plasmas have several environmental applications such as plasma-assisted combustion, air purification and ozone production. Since they exist substantially at room temperature, cold plasma can be used to modify the surface properties of material \cite{Bonizzoni et Vassallo, 2002}.
+\usepackage {biblatex}
+\addbibresource{Bibliography.bib}
+%\bibliography{Intro.bib}
 
-The phenomenon of Non-Equilibrium cold plasmas was studied with the help of a theory developed by Loeb and Meek \cite{Loeb and Meek , 1940a and 1940b} who described the formation of a highly non-linear space charge waves before the occurence of electrical breakdown, which creates an internal electric field of its own, comparable to the applied (external) field. These space charge waves are commonly known as streamers. Streamers are considered as the precursors to spark discharges, lightening\cite{Bazelyan et Raizer 2000} and sprites \cite{Franz et al 1990; Bourdon et al 2007}. They are able to initiate spark discharges in relatively shorter gaps i.e several centimetres, at near ground pressures in air.  
+\begin{document}
 
-Several attempts were made in order to model analytically the various quantitative properties of the streamers \cite{Wright & London 1964, }. Mostly, the solutions were one-dimensional and they made unsatisfactory approximations for the solution of electric field. With the advent of more powerful computer and faster algorithms, numerical solution the streamer tranport equations was made possible. Earliest numerical modeling of streamers was done by Davies, Davies and Evans \cite{Davies et al 1971}, who developed a numerical algorithm for the treatment of hydronamic model representation of the streamer transport. They used a first-order method of characterstics for integrating the transport equations. However, the algorithm was for one dimensional treatment of transport and had stability issues when implemented for two-dimensional equations. Several teams \cite{Kline, 1974; Abbas & Bayle, 1980; Yoshida & Tagashira, 1976} adopted this method. Two main problems hampered the numerical solution of streamer propagation. First was that problem was atleast 2-D. Second was the steep gradients which are difficult to capture. Dhali and Williams proposed a numerical approach to the problem as a 2-D numerical model using drift-diffusion equations for electrons and positive ions coupled with Poisson's equation for Electric Field to describe the streamer propagation. They used a Flux-Corrected Transport technique to deal with the steep gradients. A more detailed description can be found in their paper \cite{Dhalli 1987}. The FCT technique was further adopted by Kushner's team \cite{Kushner et al 1989} to study the electron-velocity distribution (kinetic model). But solving Boltzmann equations using kinetic model proves to be very time consuming as it takes into account the solution calculation of several super particles using Lagrangian approach. FCT was also implemented by Morrow's team to study streamer propagation in air \cite{Morrow et al, 1997}. Several works were done for non-uniform gaps. \cite{Vitello et al, 1994} used a point-plane gap to perform fully 2-D simulation of streamer propagation. Babaeva and team \cite{Babaeva 1997} used a sphere-plane configuration. The computational grid is a tangent to the spherical electrode (i.e a single point of contact) and hence the electrode is not included in the domain.A similar approach was implemented by Luque's team \cite{Luque et al 2008} where they studied 2-D streamer propagation using point-plane geometry with one point of contact of electrode with the computational domain. Kulikovsky \cite{Kulikovsky 1994} and Pancheshnyi \cite{Pancheshnyi S 2005} used a hyberboloid-plane gap for streamer modeling.
+%\maketitle
 
-Leer developed a new second-order accurate algorithm for integrating flow equations based on conservation laws named monotonic upwind-centered scheme for conservation-law (MUSCL) scheme \cite{Brahm Van Leer, 1979}. This scheme was implemented by Eichwald and team \cite{Eichwald et al, 1998, 2006} for 2-D modeling of streamer discharges in collaboration with the Finite Volume Methods. FVM was also adopted by Kushner and team \cite{Kushner et al 2003} who studied the breakdown processes in metal halid lamps. Zakari and team \cite{Zakari et al 2015} used median-dual control volumes for FVM with unstructured grid for studying the streamer discharges between point-plane electrodes.
+\justifying
 
-In early 2000s, Gheorghiou and team introduced finite element methods to solve the electro-hydrodynamic transport equations of streamer propagation on plane-plane geometry \cite{Gheorghiou et al, 1999}. They combined the FEM technique with FCT to handle accurately the steep density gradients. A critical analysis for the use of FEM-FCT on unstructured and FVM-MUSCL on structured methods in the streamer modeling was done by Ducasse and team \cite{Ducasse et al 2007}. According to their analysis, both FEM-FCT and FVM-MUSCL methods gave numerically accurate and close solutions. But the implementation of Finite Elements is much more complex and the also the object oriented programming approach with FEM increases the memory needs. Also, the computational time for FEM is much more than FVM, even though it uses less number of nodes. However, the use of FVM methods is restricted to complex geometries. To overcome this restriction, Celestin and team \cite{Celestin et al, 2009} developed a method named Ghost Fluid Method which takes into account the geometry of the electrodes to accurately solve the Poisson's equation and subsequently the evolution of the charge densities. To solve the poisson's equation more accurately , Kacem & team \cite{Kacem et al 2011} developed a Full MultiGrid (FMG) method to solve the linear matrix systems by smoothening the solution on the set of progressively coarsened grids.
+\section{Introduction}
 
-The effect of photoionization was generally ignored during the initial attempts of numerical modeling streamers and the pre-ionization for stable streamer propagation was provided by a uniform neutral background ionization of the gas \cite{Dhalli et al , 1987}. Later, photoionization source term was calculated using integral models with their coefficients based on experiments by \cite{Penney et al 1970; Zheleznyak et al, 1982}. Kulikovsky suggested a method which assumes emitting volume of ionizing radiation to be a cylinder around the main axis of discharge which is further divided into rings. The effects of this ring can be characterized by their relative locations which is described by a geometrical factor. This factor depends upon computational geometry and is reauired to be calculated only once before numerical simulation, hence, reducing computational time and memoery use. Pancheshnyi \cite{Pancheshnyi et al, 2001} studied the effect of electron distribution in front of streamer head on the charactestics of the discharge using integral model and also compared these characterstics with those obtained by using spatially uniform pre-ionized background. However, the accuracy of above mentioned approximate models were not rigorously evaluated. To yield a more accurate photoionization source term, Djermoune \cite{Djermoune et al., 1995a, 1995b} proposed direct numerical solution of eddington approximation of the radiative transfer equation. This model of eddington approximation was further improved by Segur and team \cite{Segur et al., 2006}. Another approach proposed was transformation of intergral expression of photoionization term into a set of Helmholtz differential equations by approximating the absorption function of the gas. 
+Plasma exist in several forms in the Universe such as surface of the sun, interstellar gaseous clouds. They can also be observed near Earth's surface in the form of Lightning strikes \cite{Bazelyan2000TheLasers} \cite{Raizer1991GasRazryada}, sprites \cite{Bourdon2007EfficientEquations} \cite{Franz1990TelevisionSystem} and auroras. However, they do not exist naturally on Earth and hence created artificially by humans for various scientific and commercial purposes. A Plasma is formed when a medium (gas) is provided with sufficient energy to remove electrons from atoms of the medium. This energy may be provided by application of an electric field, heating or other sources such as cosmic rays. Hence a plasma primarily consists of electrons, positively charged ions and neutrals.
 
-\section{Scope of the Ph.D thesis}
+Based on relative temperatures of electrons, ions and neutrals, Plasma can be classified into two types, namely, thermal and non-thermal plasma. In thermal plasma, the electrons are in thermal equilibrium with the positive ions. In non-thermal plasma, the temperature of the electron is much higher than those of the ions and neutrals. This is because the energy transfer from applied electric field to electrons is much higher than the energy loss due to collisional energy transfer between electrons and ions or heavy species. This is due to the relatively smaller mass of the electrons. Non-Equilibrium Plasma also referred as Cold Plasma have several environmental applications such as plasma-assisted combustion \cite{Starikovskaia2006PlasmaCombustion} \cite{Popov2016KineticsMixtures},pollution control, surface treatment \cite{Kogelschatz2002FilamentaryDischarges}  and ozone production \cite{Eliasson1991ModelingPlasmas}. Since they exist substantially at room temperature, cold plasma can be used to modify the surface properties of material \cite{Bonizzoni2002PlasmaApplications}.
+
+The phenomenon of Non-Equilibrium cold plasma was studied with the help of a theory developed by Loeb and Meek \cite{Loeb1929THEPRESSURE} who described the formation of a highly non-linear space charge waves before the occurrence of electrical breakdown, which creates an internal electric field of its own, comparable to the applied (external) field. These space charge waves are commonly known as streamers. Streamers are considered as the precursors to spark discharges, lightening and sprites. They are able to initiate spark discharges in relatively short gaps i.e several centimetres, at near atmospheric pressures in air.  
+
+Several attempts were made in order to model analytically the various quantitative properties of the streamers \cite{Wright1964ASpark} \cite{Dawson1965APropagation} \cite{Albright1972IonizingStreamers}. Mostly, the solutions were one-dimensional and they made unsatisfactory approximations for the solution of electric field. With the advent of more powerful computer and faster algorithms, numerical solution of the streamer transport equations was made possible. Earliest numerical modeling of streamers was done by Davies, Davies and Evans \cite{Davies1971ComputerDischarges}, who developed a numerical algorithm for the treatment of hydrodynamic model representation of the streamer transport. They used a first-order method of characteristics for integrating the transport equations. However, the algorithm was for one dimensional treatment of transport and had stability issues when implemented for two-dimensional equations. Several teams \cite{Kline1974CalculationsGaps} \cite{Abbas1980ABreakdown} \cite{Yoshida1976ComputerOvervoltages} adopted this method. Two main problems hampered the numerical solution of streamer propagation. First was that problem was at least 2-D. Second was the steep gradients which are difficult to capture. Dhali and Williams proposed a numerical approach to the problem as a two-dimensional numerical model using drift-diffusion equations for electrons and positive ions coupled with Poisson's equation to describe the streamer propagation. They used a Flux-Corrected Transport (FCT) technique to deal with the steep gradients. A more detailed description can be found in their paper \cite{Dhali1987TwodimensionalGases}. The FCT technique was further adopted by Kushner's team \cite{DiCarlo1989SolvingTransport} to study the electron-velocity distribution (kinetic model). But solving Boltzmann equations using kinetic model proves to be very time consuming as it takes into account the calculation of several particles (known as super-particles) where it follows the behaviour of each particle along its path. FCT was also implemented by Morrow's team to study streamer propagation in air \cite{Morrow1997StreamerAir}. Several works were done for non-uniform gaps. \cite{Vitello1994SimulationNitrogen} used a point-plane gap to perform fully two-dimensional simulation of streamer propagation. Babaeva and team \cite{ISI:A1997XK56000036} used a sphere-plane configuration. The computational grid is a tangent to the spherical electrode (i.e a single point of contact) and hence the electrode is not included in the domain.A similar approach was implemented by Luque's team \cite{Luque2008PositiveVelocities} where they studied 2-D streamer propagation using point-plane geometry with one point of contact of electrode with the computational domain. Kulikovsky \cite{Kulikovsky1994TheSimulation} and Pancheshnyi \cite{Pancheshnyi2005DevelopmentSimulation} used a hyberboloid-plane gap for streamer modeling.
+
+Leer developed a new second-order accurate algorithm for integrating flow equations based on conservation laws named monotonic upwind-centered scheme for conservation-law (MUSCL) scheme \cite{vanLeer1979TowardsMethod}. This scheme was implemented by Eichwald and team \cite{Eichwald1998} \cite{Eichwald2006EffectDynamics} for two-dimensional modeling of streamer discharges in combination with the Finite Volume Methods. FVM was also adopted by Kushner and team \cite{Lay2003BreakdownLamps} who studied the breakdown processes in metal hallide lamps. Zakari and team \cite{Zakari2015AnDischarge} used median-dual control volumes for FVM with unstructured grid for studying the streamer discharges between point-plane electrodes.
+
+In early 2000s, Gheorghiou and team introduced finite element methods to solve the electro-hydrodynamic transport equations of streamer propagation on plane-plane geometry \cite{Georghiou1999AnAlgorithm}. They combined the FEM technique with FCT to handle accurately the steep density gradients. A critical analysis for the use of FEM-FCT on unstructured and FVM-MUSCL on structured methods in the streamer modeling was done by Ducasse and team \cite{Ducasse2007CriticalMethods}. According to their analysis, both FEM-FCT and FVM-MUSCL methods gave numerically accurate and close solutions. But the implementation of Finite Elements is much more complex and the also the object oriented programming approach with FEM increases the memory needs. Also, the computational time for FEM is much more than Finite Volume Methods (FVM), even though it uses less number of nodes. However, the use of FVM methods is restricted to complex geometries. To overcome this restriction, Celestin and team \cite{Celestin2009TheGeometries} developed a method named Ghost Fluid Method which takes into account the geometry of the electrodes to accurately solve the Poisson's equation and subsequently the evolution of the charge densities. To solve the Poisson's equation more accurately , Kacem and team \cite{Kacem2012FullPressure} developed a Full MultiGrid (FMG) method to solve the linear matrix systems by smoothening the solution on the set of progressively coarsened grids.
+
+The effect of Photoionization was generally ignored during the initial work of numerical modeling of streamers and the pre-ionization for stable streamer propagation was provided by a uniform neutral background ionization of the gas \cite{Dhali1987TwodimensionalGases}. Later, Photoionization source term was calculated using integral models with their coefficients based on experiments by \cite{Penney1970PhotoionizationNitrogen} and \cite{ZhelezniakM.B.andMnatsakanianA.K.andSizykh1982PhotoionizationDischarge}. Kulikovsky \cite{Kulikovsky2000TheDynamics} suggested a method which assumes emitting volume of ionizing radiation to be a cylinder around the main axis of discharge which is further divided into rings. The effects of this ring can be characterized by their relative locations which is described by a geometrical factor. This factor depends upon computational geometry and is required to be calculated only once before numerical simulation, hence, reducing computational time and memory use. Pancheshnyi \cite{Pancheshnyi2001RoleStreamer} studied the effect of electron distribution in front of streamer head on the characteristics of the discharge using integral model and also compared these characteristics with those obtained by using spatially uniform pre-ionized background. However, the accuracy of above mentioned approximate models were not rigorously evaluated. To yield a more accurate Photoionization source term, Djermoune \cite{Djermoune1995TwoDischarge} proposed direct numerical solution of Eddington approximation of the radiative transfer equation. This model of Eddington approximation was further improved by Segur and team \cite{Segur2006TheDischarges}. Another approach proposed was transformation of integral expression of Photoionization term into a set of Helmholtz differential equations by approximating the absorption function of the gas was developed by \cite{ZhelezniakM.B.andMnatsakanianA.K.andSizykh1982PhotoionizationDischarge} and improved by \cite{Luque2007PhotoionizationModes}. Bourdon et al \cite{Bourdon2007EfficientEquations} investigated and compared all of these approaches and emphasized on the accurate definition of boundary condition in these approaches. They also stated the simplicity of implementation of these models to complex two and three- dimensional simulation geometries.
+
+Several grid generation methods have been used for meshing in plasma physics and computational physics domain namely, Structured by Zhang et al\cite{Zhang2013CompositeGeometries}, Dannenhoffer\cite{DANNENHOFFERIII1991AGeometries}; Unstructured by Kushner's team in Lay et al\cite{Lay2003BreakdownLamps} and \cite{Babaeva2006StreamerParticles}; Cartesian by Pancheshnyi et al\cite{Pancheshnyi2008NumericalRefinement}. Structured grids allow the user a high degree of control. However, connections between blocks requires mapping which gets complex when blocks have different density of grid cells. To avoid these problems, Overlapping Grids are used. Structured Overlapping Grids allow the individual blocks to conform to the physical boundaries by overlap. Within overlap region, the grids communicate through interpolation points. For determining solution of PDEs, curvilinear composite overlap grids technique was first used by Chesshire et al \cite{Chesshire1990CompositeEquations}. Overlapping grid method can also be used for complex geometries \cite{Baker1992MeshShapes}. Henshaw \cite{Henshaw2003AnGrids} used overlapping composite smooth grids to represent complex domains especially boundaries. This was used to increase overall computational speed and decrease usage of memory since the solution is sensitive to local grid induced gradients. Considering the advantages of Overlapping grids over other grid generation methods, it has been used in the current study of plasma. Overture object-oriented framework incorporates both the advantages of overlapping grids and an efficient elliptic partial differential equation solver \cite{Henshaw2005OnGrids}. One of the advantages of the Overture is the use of multigrid method which is effective in solving partial differential equations (PDE). It can be used for Finite Volume Method and has solver which can deal with problems of Laplace Operator.
+
+\subsection{Scope of the Ph.D thesis}
+This PhD is focused on the computational approach to the mathematics and physics to study the characteristics of the streamer discharge phenomena especially positive streamer. To avoid the complications when applying finite volume methods on the complex geometries, an overlapping mesh method has been implemented. The effects of Photoionization are taken into account to accurately study the transient phenomena of positive streamer propagation. Local field approximation has been implemented. 
 
 
 
 
-\chapter{Streamers' Theory}
+\section{Streamers' Theory}
 
-\section{Important processes in discharges}
-A gaseous medium such as air always contain some ions and electrons. This is due to natural processes such as cosmic radiation, photoionization, etc. When an electric field is applied to the gas, it accelerates these electrons and ions . As electrons move through the medium they collide with neutral atoms or molecules. Important collisions are:
+\subsection{Important processes in discharges}
+A gaseous medium such as air always contain some ions and electrons. This is due to natural processes such as cosmic radiation, Photoionization, etc. When an electric field is applied to the gas, it accelerates these electrons and ions. As electrons move through the medium they collide with neutral atoms or molecules. The motion of ions is hundreds of times less than that of the electrons \cite{Raizer1991GasRazryada}. Important collisions between electron and heavier species(neutrals, ions) are:
 
 1. Impact Ionization:
+    This phenomenon occurs when an electron with sufficient energy knocks an electron off the neutral atom. It is the most important mechanism of charge generation in the bulk of gas discharge.
+    
+\begin{equation}
+e + M \rightarrow e + e + M^+
+\end{equation}
+
 
 2. Recombination:
            It occurs when electron loses its energy and recombines with an ion.
 
-3. Excitation:
-           In this process, an electron collides with a neutral atom and some of electron's kinetic energy is transfered to the internal energy of the atom. This results in the excitation of the atom.
+\begin{equation}
+e + M^+ \rightarrow M
+\end{equation}
 
+3. Excitation:
+           In this process, an electron collides with a neutral atom and some of electron's kinetic energy is transferred to the internal energy of the atom. This results in the excitation of the atom. Excited atoms generally de-excite giving away photons.
+
+\begin{equation}
+e + M \rightarrow e + M^* \rightarrow e + M + h\nu
+\end{equation}
 
 4. Attachment:
             In this process, the electron sticks with a neutral atom to make a negative ion.
 
+\begin{equation}
+e + M_2 \rightarrow M^- + M
+\end{equation}
 
-\section{Electron Avalanche}
+\subsection{Electron Avalanche}
 
 If the energy acquired by a single electron is more than the ionization potential , it knocks off another electron from a neutral molecule. As a consequence, two slow electrons are accelerated further by the reigning electric field. Until the breakdown value of electric field has been achieved, there is a balance between the production of electrons (due to impact ionization) and loss of electrons (due to attachment). Above the breakdown field, the number of electrons start to increase exponentially giving rise to a phenomenon known as avalanche.
 
-\section{Avalanche to Streamer Transition}
-External electric field acts as controller of an electron avalanche. The number of electrons is not sufficient enough to have a space charge field of its own. However, as the number of electrons is increased to a sufficient number density (Meek's Criterion), they start to develop their own field which dsitorts the external electric field. When the newly formed space charge field becomes comparable to the external field, the electron avalanche transforms into a streamer whose propagation is controlled by the space charge field. 
+\subsection{Avalanche to Streamer Transition}
+External electric field acts as controller of an electron avalanche. The number of electrons is not sufficient enough to have a space charge field of its own. However, as the number of electrons is increased to a sufficient number density (Meek's Criterion \cite{Raizer1991GasRazryada}), they start to develop their own field which distorts the external electric field. When the newly formed space charge field becomes comparable to the external field, the electron avalanche transforms into a streamer whose propagation is controlled by the space charge field. 
 
-\section{Streamer Discharge Mechanism}
+\subsection{Streamer Discharge Mechanism}
 
-Streamers are thin ionized plasma channels formed between two oppositely charged electrodes when space charge field become comparable to the external electric field (Meek's criterion). They can propagate to either direction i.e towards anode or cathode as a result of distortion of the external electric field. They occur before the complete breakdown of a gas or dieclectric medium. Hence, they are also referred as precursors of electrical breakdown.  The curved space charge layers tend to screen the external field in the discharge region and as a result they develop an enhanced electric field at the tip, which permits streamers to propagate in the region of field lower than that at breakdown. 
+Streamers are thin ionized plasma channels formed between two oppositely charged electrodes when space charge field become comparable to the external electric field (Meek's criterion). They can propagate to either direction i.e towards anode or cathode as a result of distortion of the external electric field. They occur before the complete breakdown of a gas or dielectric medium. Hence, they are also referred as precursors of electrical breakdown.  The curved space charge layers tend to screen the external field in the discharge region and as a result they develop an enhanced electric field at the tip, which permits streamers to propagate in the region of field lower than that at breakdown. 
 There are two types of streamers: Positive and Negative. Positive streamers are formed when the avalanche exhausts its reserve of electrons i.e when it reaches anode. They get initiated at the anode and appear to move towards cathode. The photons generated from the primary avalanche generates the free electrons ahead of the streamer head which are then absorbed by the incoming streamer and form a quasi-neutral plasma with the ions in the mix. Before being absorbed these secondary electrons also excite some neutral atoms on their way. These atoms then emit more photons, hence repeating the cycle. This is how positive streamers propagate. Negative streamers are formed when the gap is large enough so that the avalanche transforms into a streamer even before reaching the anode. Hence, negative streamers propagate towards the anode. They are more diffusive since the electrons move outwards in contrast to positive streamers where electrons get absorbed by the streamer.    
 
-\subsection{Challenges in Modeling Streamers}
+\subsubsection{Challenges in Modeling Streamers}
 
-   There are several challenges that occur in numerically modeling streamers. 
+   There are several challenges that occur in numerically modeling streamers: 
    
-   1. Intial attempts on modeling of streamers propagation revealed that the characterstics of streamer can be truly described in 2-D. 
+   1. Initial attempts on modeling of streamers propagation revealed that the characteristics of streamer can be truly described in at-least 2-D. 
+   
    2. Streamer involves steep density gradients which require extremely fine grid especially in the discharge region.
+   
    3. Streamer involves very short time scales of propagation. Numerically modeling these time scales demands very high computational costs and high resources. 
-   4. The non-linear behaviour of space charge with the electric field makes the coupling between tranport equations and poisson's equation very complicated.
+   
+   4. The non-linear behaviour of space charge with the electric field makes the coupling between transport equations and Poisson's equation very complicated.
 
 
-\chapter{Numerical Models}
-      Numerical models are used to solve discretized partial differential equations on a computational domain. This is done through various numerical models. As discussed above, in literature, initially finite difference methods were used to model the streamers in one dimension. However, the accuracy of finite difference methods could not provide best results and hence new methods had to be adopted. Finite Volume methods have been readily accepted since they are flexible in use and does not demand complex code implementation.
+\section{Numerical Models}
+      Numerical models are used to solve discretized partial differential equations on a computational domain. This is done through various numerical models. As discussed above, in literature, initially finite difference methods were used to model the streamers in one dimension. However, the implementation of finite difference methods could not provide accurate results especially for higher order partial differential equations and hence new methods were adopted. Finite Volume methods have been readily accepted since they are flexible in use and does not demand complex code implementation.
 
-\section{Poisson's Equation}
+\subsection{Poisson's Equation}
 
-   For numerical modeling of streamers, the calculation of electric field is crucial. This is because the transport parameters and source terms are non-linearly dependent on the electric field. Also, the charge densities are directly related to the electric field. The electic field is calculated from the Poisson's equation. In case of streamer simulations, the elliptic Poisson's equation is dicretized using the numerical methods and electic potential is approximated. Therefore, solution of Poisson's equation required three main points:
+   For numerical modeling of streamers, the calculation of electric field is crucial. This is because the transport parameters and source terms are non-linearly dependent on the electric field. Also, the charge densities are directly related to the electric field. The electric field is calculated from the Poisson's equation. In case of streamer simulations, the elliptic Poisson's equation is discretized using the numerical methods and electric potential is approximated. Therefore, solution of Poisson's equation required three main points:
+   
    1. Discretization scheme: This is required to divide the domain into numerous grids with varying grid size. It controls the accuracy and the stability of the solution.
-   2. Boundary Conditions: Since Poisson's equation is a partial differential equation, it requires special conditions at the domain boundaries to describe the computational domain.
-   3. Numerical Methods: This is required to solve the discretized equations of Poisson's equation. There are two types of solvers: Direct(FACR,MUMPS) and iterative(Multigrid). 
+   
+   2. Boundary Conditions: Since Poisson's equation is a partial differential equation, it requires special conditions at the domain boundaries to describe its solution at computational domain boundaries.
+   
+   3. Numerical Methods: This is required to solve the discretized equations of Poisson's equation. There are two types of solvers: Direct(FACR\cite{Swarztrauber1979AlgorithmD3},MUMPS\cite{Amestoy2001AScheduling}) and iterative(Multigrid Solver \cite{Adams1989Mudpack:Equations}). 
 
 
 \subsection{Local Field Approximation}
 
-According to Local Field Approximation, The local equilibrium of electrons is instantaneously achieved in time in response to Electric Field. Hence, the transport coefficients and reaction coefficients are functions of local parameters only, thus imposing a local equilibrium. This approximation is valid only as long as the time scales are much smaller than the spatial or temporal gradients in the electric field. This thoery was developed by Kundhardt and team \cite{Kunhardt et al 1988}. It is used in numerical modeling of streamers since then.
+According to Local Field Approximation, the local equilibrium of electrons is instantaneously achieved in time in response to Electric Field. Hence, the transport coefficients and reaction coefficients are functions of local parameters only, thus imposing a local equilibrium. This approximation is valid only as long as the time scales are much smaller than the spatial or temporal gradients in the electric field. This theory was developed by Kundhardt and team \cite{Kunhardt1988DevelopmentStreamers}. It is used in numerical modeling of streamers since then.
+
+\subsection{Streamer Equations}
+The simplified model to simulate streamer propagation is based on the drift-diffusion equations for electrons and ions coupled with Poisson's equation:
+
+\begin{equation}
+\frac{\partial n_e}{\partial t} + \vec{\nabla} \cdot n_e \vec{v_e} -\vec{\nabla} \cdot (D_e \vec{\nabla} \cdot n_e) = S_{ph} + S_e^+ - S_e^- 
+\end{equation}
+
+\begin{equation}
+\frac{\partial n_p}{\partial t} + \vec{\nabla} \cdot n_p \vec{v_p} -\vec{\nabla} \cdot (D_p \vec{\nabla} \cdot n_p) = S_{ph} + S_p^+ - S_p^- 
+\end{equation}
+
+\begin{equation}
+\frac{\partial n_n}{\partial t} + \vec{\nabla} \cdot n_n \vec{v_n} -\vec{\nabla} \cdot (D_n \vec{\nabla} \cdot n_n) = S_n^+ - S_n^- 
+\end{equation}
+
+\begin{equation}
+\nabla^2 V = -\frac{q_e}{\epsilon_0} (n_p - n_n - n_e)
+\end{equation}
+
+where subscripts e, n ,p are electrons, neutrals and positive ions respectively. $n_i$ is the number density of species i, V is the potential, $\vec{v_i}= \mu_i \vec{E}$ is drift velocity of the species i, $\vec{E}$ is the electric field, $D_i$ is the Diffusion tensor $\mu_i$ is the mobility of i species. q and $\epsilon_0$ are absolute values of electric charge and permittivity of free space respectively. $S^+$ and $S^-$ are the rates of production and loss of charged particles and $S_{ph}$ is the rate of electron-ion pair production due to photoionization in a gas volume. 
+
+Another equation is required to take into account the production and loss of charged particles due to excited species, which is given by:
+
+\begin{equation} \label{eq:9}
+\frac{\partial n_u}{\partial t} - D_u \vec{\nabla^2} n_u = \nu_u n_e -\sum_{d < u}\frac{n_u}{\tau_{ud}} + \sum_{d > u}\frac{n_d}{\tau_{du}} - S_u^- + S_u^+ 
+\end{equation}
+
+where $D_u$ is the diffusion coefficient of species u in gas and $\nu_u$ is the electron impact ionization frequency for level u. On Right Hand Side, second term corresponds to the radiative deexcitation level of u to lower levels d $<$$ u . Third term represents the radiative excitation level from d to u $>$ d. $\frac{1}{\tau}$ is the Einstein Coefficient for spontaneous transition. $S^-$ and $S^+$ are loss and source terms due to quenching between transition levels.     
+
+\subsection{Photoionization Model}
+Photoionization source term is calculated based on the direct numerical solution of Eddington approximation(first and third-order) of the Radiative transfer equation as provided by \cite{Segur2006}. It is directly related to the photon distribution function $\Psi_\nu(\vec{r},\vec{\Omega},t)$ of frequency $\nu$ at position $\vec{r}$ in direction $\vec{\omega}$ and at time t.
+
+\begin{equation}
+S_{ph} (\vec{r},t) = c\int_{0}^{\infty}d\nu \mu_{\nu}^{ph}  \int_{\Omega}d\Omega\Psi_\nu(\vec{r},t)
+\end{equation}
+
+Retaining just the isotropic part of the photon distribution function$\Psi_0(\vec{r},t)$, above equation becomes:
+
+\begin{equation} \label{eq:6}
+S_{ph} (\vec{r},t) = c\int_{0}^{\infty}d\nu \mu_{\nu}^{ph}  \Psi_0(\vec{r},\vec{\Omega},t)
+\end{equation}
+
+The photon transport or radiative transfer equation is given by :
+
+\begin{equation}
+\frac{\partial\Psi_\nu(\vec{r},\vec{\Omega},t)}{\partial t} + c\vec{\Omega} \cdot \vec{\nabla} \Psi_\nu(\vec{r},\vec{\Omega},t) = \sum_{ud} \frac{n_u (\vec{r},t)\phi_{ud} (\nu)}{4 \pi \tau_{ud}} - \mu_\nu c \Psi_\nu(\vec{r},\vec{\Omega},t)
+\end{equation}
+
+where $\mu_\nu$ is the spectral absorption coefficient, $n_u(\vec{r},t)$ is the density of radiative species u at position $\vec{r}$ and time t and $\int_{0}^{\infty}d\nu = 1$ is the normalised emission line profile for the spontaneous transition from upper energy level (u) to lower energy level (d). 
+
+Within the timescale of streamer propagation, photon propagation is negligible and hence the transient term of the equation can be ignored. 
+
+\begin{equation}
+\vec{\Omega} \cdot \vec{\nabla} \Psi_\nu(\vec{r},\vec{\Omega},t) = \sum_{ud} \frac{n_u (\vec{r},t)\phi_{ud} (\nu)}{4 \pi c \tau_{ud}} - \mu_\nu \Psi_\nu(\vec{r},\vec{\Omega},t)
+\end{equation}
+
+\subsubsection{Classical Integral Model for Photoionization}
+
+As mentioned in \cite{Bourdon2007EfficientEquations}, \cite{ZhelezniakM.B.andMnatsakanianA.K.andSizykh1982PhotoionizationDischarge}, direct integration of above radiative transfer equation over the whole space and over solid angle $d\Omega$ gives integral expression for isotropic part of distribution function $\Psi_{0,\nu}(\vec{r},t)$. Also the photoionization coefficient is usually considered to be proportional to total absorption coefficient $\mu{_\nu}^{ph}= \xi \mu_\nu$. Substituting the isotropic function in the equation \ref{eq:6} the photoionization rate at point of observation $\vec{r}$ due to arbitrary point $\vec{r}^'$ on the source ring emitting photons is given by:
+
+\begin{equation} \label{eq:14}
+S_{ph}(\vec{r}) = {\int\int\int_{V^'}} \frac{I(\vec{r'}) g(R)}{4 \pi {R^2}} d{V^'}
+\end{equation} 
+
+where R is the position vector $R= \vec{r}-\vec{r'}$. The production of photons is proportional to the ionization production rate $S_i$ and then $I(\vec{r})$ is given by 
+
+\begin{equation}
+I(\vec{r}) = \xi \frac{n_u(\vec{r})}{\tau_u}= \frac{p_q}{p+p_q} \xi \frac{\nu_u}{\nu_{ion}} S_i(\vec{r})
+\end{equation} 
+
+Where $\xi$ is the mean value of $\xi_\nu$ , $n_u(\vec{r}$ is the density of radiative excited species u, ratio $\frac{p_q}{p+p_q}$ is the quenching factor, $\tau_u$ is the radiative relaxation time accounting for effects of spontaneous emission (i.e $\tau_u = \frac{1}{A_u}$ where $A_u$ is the Einstein coefficient., $\nu_u$ is the electron impact excitation frequency for level u and $S_i=\nu_ion n_e$ where $n_e$ is the electron number density and $\nu_ion$ is the ionization frequency. 
+
+According to the model derived by Zhelezniak et al \cite{ZhelezniakM.B.andMnatsakanianA.K.andSizykh1982PhotoionizationDischarge}, it is generally assumed that ionization in $N_2-O_2$ mixtures (air) can only be produced by photons emitted by Nitrogen in the wavelength range $\Delta \lambda = 98-102.5$mm. The photon energy is not sufficient to ionize the nitrogen molecules and only oxygen molecules are ionized. Hence, the term g(R) in the equation \ref{eq:9} is given by:
+
+\begin{equation}
+\frac{g(R)}{p_{O_2}} = \frac{exp(-\chi_{min} p_{O_2} R)- exp(-\chi_{max} p_{O_2} R)}{p_{O_2} R ln(\chi_{max} / \chi_{min})}
+\end{equation} 
+
+The above model has been implemented using cylindrical coordinates system to take into account the dynamics of two-dimensional azimuthally symmetric streamers.
+
+In the model by \cite{ZhelezniakM.B.andMnatsakanianA.K.andSizykh1982PhotoionizationDischarge}, the equation \ref{eq:9} is not solved with the streamer equations and steady state is assumed (transient term becomes zero). If the diffusion term is ignored and source terms on level u simplifies to the following relation:
+
+\begin{equation}
+\frac{n_u(\vec{r'},t)}{\tau_u} = \frac{p_q}{p+p_q} \frac{\nu_u}{\nu_{ion}} \nu_{ion} n_e
+\end{equation} 
 
 
-\chapter{Photoionization Model}
+\subsubsection{Eddington Approximation Model}
+The Radiative transfer equation depends on frequency $\nu$ as can be observed from previous equation and hence needs to be solved for a large number of frequencies. This can be simply avoided by integrating the equation over frequency intervals over a range of wavelengths. This method is termed as Multigroup Method. The method proposed by \cite{Segur2006} was a more simplified model of radiative transfer equations termed as Monochromatic approximation:
+
+\begin{equation}
+\Psi_\nu(\vec{r},t) = \Psi(\vec{r},t) \delta(\nu)
+\end{equation} 
+
+where $\delta(\nu)$ is a Dirac function. Hence, the Radiative transfer equation becomes:
+
+\begin{equation} \label{eq:10}
+\vec{\Omega} \cdot \vec{\nabla} \Psi_\nu(\vec{r},\vec{\Omega},t) + \mu\Psi_\nu(\vec{r},\vec{\Omega},t) = \frac{n_u (\vec{r},t)}{4 \pi c \tau_{u}}
+\end{equation}
+
+In Eddington Approximation it is assumed that the distribution of photons can be represented by the first two terms in the spherical harmonic expansion:
+
+\begin{equation} \label{eq:11}
+\Psi(\vec{r},t) = \frac{1}{4\pi}\Psi_0(\vec{r},t) + \frac{3}{4\pi}\vec{\Omega} \cdot \vec{\Psi_1}(\vec{r},t) 
+\end{equation} 
+
+where $\Psi_0$ is the isotropic part of the photon distribution function given by:
+
+\begin{equation}
+\Psi_0(\vec{r},t) = \int_{\Omega}d\Omega\Psi(\vec{r},\Omega,t) 
+\end{equation} 
+
+and $\vec{\Psi}_1$ represents first order anisotropy correction to the dominant isotropic term $\Psi_0$ :
+
+\begin{equation}
+\vec{\Psi}_1(\vec{r},t) = \int_{\Omega}d\Omega \vec{\Omega}\Psi(\vec{r},\Omega,t) 
+\end{equation} 
+
+Integrating equation \ref{eq:10} over solid angle gives:
+
+\begin{equation} \label{eq:14}
+\vec{\nabla} \vec{\Psi}_1(\vec{r},t) + \mu\Psi_0(\vec{r},t) = \frac{n_u (\vec{r},t)}{c \tau_{u}}
+\end{equation}
+
+After multiplication by $\vec{\Omega}$ , equation \ref{eq:10} becomes:
+
+\begin{equation} \label{eq:15}
+\frac{1}{3}\vec{\nabla}\Psi_0(\vec{r},t) + \mu \vec{\Psi_1}(\vec{r},t) = 0
+\end{equation} 
+
+Combining equations \ref{eq:14} and \ref{eq:15} and eliminating $\Psi_1$, we obtain the following equation:
+
+\begin{equation} \label{eq:16}
+-\vec{\nabla}(\frac{1}{3\mu} \vec{\nabla}\Psi_0(\vec{r},t) + \mu \Psi_0(\vec{r},t) = \frac{n_u (\vec{r},t)}{c \tau_{u}}
+\end{equation} 
+
+The above equation is called Eddington approximation of the previously derived monochromatic expression of radiative transfer equation. The advantage of this equation lies the simplicity in solving it. It is an elliptic equation which has a similar structure to Poisson's Equation and hence can be solved with same numerical routine. 
 
 
-\bibliography{Introduction_Thesis}
+
+
+
+\printbibliography
+%\bibliography{Intro}
+\end{document}
+
 
